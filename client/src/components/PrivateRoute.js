@@ -7,7 +7,7 @@ import { Route, Redirect } from 'react-router-dom'
     localStorage.getItem("token") ? (
         <BubblePage {...props} />)
         : (
-            <Redirect to="/login" />
+            <Redirect to="/" />
         )
     } />
 );

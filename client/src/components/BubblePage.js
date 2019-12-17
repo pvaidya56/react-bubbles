@@ -15,7 +15,8 @@ const BubblePage = () => {
     .get("/api/colors")
     .then(res => setColorList(res.data))
     .catch(err => console.log(err));
-  });
+  }, []);
+  console.log(colorList);
   return (
     <>
       <ColorList colors={colorList} updateColors={setColorList} />
