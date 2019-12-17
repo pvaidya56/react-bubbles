@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-
-const PrivateRoute = ({ component: Component, ...rest}) => (
+import BubblePage from './BubblePage'
+import { Route, Redirect } from 'react-router-dom'
+ const PrivateRoute = ({ component: Component, ...rest}) => (
     <Route {...rest} 
     render={props => 
     localStorage.getItem("token") ? (
-        <Component {...props} />)
+        <BubblePage {...props} />)
         : (
             <Redirect to="/login" />
         )
     } />
 );
+
+export default PrivateRoute
