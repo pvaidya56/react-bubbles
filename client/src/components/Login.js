@@ -1,26 +1,26 @@
 import React, {useState} from "react";
-import { useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom'
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 const Login = (props) => {
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
-  const history = useHistory();
+  
   const [credentials, setCredentials] = useState({
     username: '',
     password: ''
   });
  
   const onLogin = e => {
-    
-    e.preventDefault();
-    axiosWithAuth().post(`api/login`, credentials)
+        axiosWithAuth().post(`/api/login`, credentials)
       .then(res => {
         console.log(res.data)
         localStorage.setItem('token', res.data.payload);
-        props.history.push('/bubblepage')
       })
+      
+
       .catch(err => console.log(err));
+      props.history.push('/bubblepage');
   };
 
   const handleChange = e => {
@@ -33,7 +33,7 @@ const Login = (props) => {
   return (
     <>
       <h1>Welcome to the Bubble App!</h1>
-      <form onSubmit={onLogin}>
+      <form >
         <input type="text" label="text"
         name="username" placeholder="Username"
         value={credentials.username}
@@ -43,7 +43,7 @@ const Login = (props) => {
         value={credentials.password}
         onChange={handleChange}/>
       </form>
-      <button>Login</button>
+      <button onSubmit={onLogin}>Login</button>
     </>
   );
 };
