@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 // import { useHistory } from 'react-router-dom'
+import axios from 'axios';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 const Login = (props) => {
@@ -12,7 +13,7 @@ const Login = (props) => {
   });
  
   const onLogin = e => {
-        axiosWithAuth().post(`/api/login`, credentials)
+        axios.post('http://localhost:5000/api/login', credentials)
       .then(res => {
         console.log(res.data)
         localStorage.setItem('token', res.data.payload);
@@ -33,7 +34,7 @@ const Login = (props) => {
   return (
     <>
       <h1>Welcome to the Bubble App!</h1>
-      <form >
+      <form onSubmit={e => onLogin(e)}>
         <input type="text" label="text"
         name="username" placeholder="Username"
         value={credentials.username}
@@ -42,8 +43,9 @@ const Login = (props) => {
         name="password" placeholder="Password" 
         value={credentials.password}
         onChange={handleChange}/>
+        <button type="submit">Login</button>
       </form>
-      <button onSubmit={onLogin}>Login</button>
+      
     </>
   );
 };
