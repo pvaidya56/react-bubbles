@@ -2,6 +2,8 @@ import React, {useState} from "react";
 // import { useHistory } from 'react-router-dom'
 import axios from 'axios';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
+import {Form, FormControl, FormGroup, FormLabel} from 'react-bootstrap'
+import Button from 'react-bootstrap/Button';
 
 const Login = (props) => {
   // make a post request to retrieve a token from the api
@@ -33,18 +35,25 @@ const Login = (props) => {
 
   return (
     <>
-      <h1>Welcome to the Bubble App!</h1>
-      <form onSubmit={e => onLogin(e)}>
-        <input type="text" label="text"
-        name="username" placeholder="Username"
+      <h1 className="heading">Welcome to the Bubble App!</h1>
+      <Form onSubmit={e => onLogin(e)}>
+        <Form.Group>
+        <Form.Label>Username</Form.Label>
+        <Form.Control type="text" label="text"
+        name="username" placeholder="Enter Username"
         value={credentials.username}
         onChange={handleChange} />
-        <input type="password"  label="password"
-        name="password" placeholder="Password" 
+        </Form.Group>
+        <Form.Group>
+        <Form.Label>Password</Form.Label>
+        <Form.Control type="password" label="password"
+        name="password" placeholder="Enter Password"
         value={credentials.password}
-        onChange={handleChange}/>
-        <button type="submit">Login</button>
-      </form>
+        onChange={handleChange} />
+        </Form.Group>
+        
+        <Button variant="primary" type="submit">Login</Button>
+      </Form>
       
     </>
   );
